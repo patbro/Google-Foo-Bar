@@ -1,0 +1,33 @@
+def solution(xs):
+    if not isinstance(xs, list):
+        return
+
+    sanitized_positive = []
+    sanitized_negative = []
+    for i in xs:
+        if i != 0 and isinstance(i, int) and abs(i) <= 1000 and abs(i) > 1:
+            if i > 0:
+                sanitized_positive.append(i)
+            else:
+                sanitized_negative.append(i)
+
+    if (len(sanitized_negative) % 2) != 0:
+        sanitized_negative[0] = sanitized_negative[0] / 2
+
+    product_positive = list_product(sanitized_positive)
+    product_negative = list_product(sanitized_negative)
+
+    product = product_positive * product_negative
+    return str(int(product))
+
+def list_product(input_list):
+    result = 1
+    for i in input_list:
+        result = result * abs(i)
+
+    return result
+
+solution([2, -3, 1, 0, -5])
+solution([2, 0, 2, 2, 0])
+solution([-2, -3, 4, -5])
+solution([1000000, -4, 4])
